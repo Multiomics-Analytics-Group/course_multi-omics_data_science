@@ -1,0 +1,4 @@
+﻿sample,run_accession,instrument_platform,fastq_1,fastq_2,fasta
+206534,206534,ILLUMINA,metagenomics/data/HMP2.206534.fastq.gz,,
+206536,206536,ILLUMINA,metagenomics/data/HMP2.206536.fastq.gz,,
+206538,206538,ILLUMINA,metagenomics/data/HMP2.206538.fastq.gz,,
