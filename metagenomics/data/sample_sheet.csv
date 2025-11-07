@@ -1,4 +1,5 @@
-﻿sample,run_accession,instrument_platform,fastq_1,fastq_2,fasta
-206534,206534,ILLUMINA,metagenomics/data/HMP2.206534.fastq.gz,,
-206536,206536,ILLUMINA,metagenomics/data/HMP2.206536.fastq.gz,,
-206538,206538,ILLUMINA,metagenomics/data/HMP2.206538.fastq.gz,,
+sample,run_accession,instrument_platform,fastq_1,fastq_2,fasta
+HSMA33OT,HSMA33OT,ILLUMINA,metagenomics/data/HSMA33OT_R1.fastq.gz,metagenomics/data/HSMA33OT_R2.fastq.gz,
+CSM9X233,CSM9X233,ILLUMINA,metagenomics/data/CSM9X233_R1.fastq.gz,metagenomics/data/CSM9X233_R2.fastq.gz,
+CSM5MCWG,CSM5MCWG,ILLUMINA,metagenomics/data/CSM5MCWG_R1.fastq.gz,metagenomics/data/CSM5MCWG_R2.fastq.gz,
+MSMAPC7P,MSMAPC7P,ILLUMINA,metagenomics/data/MSMAPC7P_R1.fastq.gz,metagenomics/data/MSMAPC7P_R2.fastq.gz,
