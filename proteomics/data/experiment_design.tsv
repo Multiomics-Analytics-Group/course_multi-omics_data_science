@@ -1,0 +1,5 @@
+Fraction_Group	Fraction	Spectra_Filepath	Label	MSstats_Condition	MSstats_BioReplicate
+1	1	proteomics/data/160914_SM-9SD9G_284.mzML	1	Non-ibd	1
+2	1	proteomics/data/160513-SM-AHYMJ-14.mzML	1	Non-ibd	1
+3	1	proteomics/data/160920_SM-AKTWT_509.mzML	1	UC	1
+4	1	proteomics/data/160928_SM-6ZEWG_423.mzML	1	UC	1
