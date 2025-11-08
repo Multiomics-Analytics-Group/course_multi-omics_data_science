@@ -1,4 +1,4 @@
-sample,fastq_1,fastq_2,standedness
+sample,fastq_1,fastq_2,strandedness
 CD,transcriptomics/data/SRR10104255.fastq.gz,,auto
 CD,transcriptomics/data/SRR10104256.fastq.gz,,auto
 non-ibd,transcriptomics/data/SRR10104257.fastq.gz,,auto
