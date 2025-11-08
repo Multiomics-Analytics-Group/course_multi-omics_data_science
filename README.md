@@ -21,9 +21,6 @@ The course is structured over **four days**, beginning with an introduction to t
 
 The course culminates with a module where participants will **apply everything learned to a real-world case study**, working with **public data**. The practical sessions will be conducted in **Python**, utilizing **Jupyter Notebooks** and other visualization tools.
 
----
-
-Would you like me to translate another text or provide a summary of the course structure?
 
 ## Keywords
 
