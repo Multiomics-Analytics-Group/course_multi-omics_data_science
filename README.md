@@ -7,13 +7,25 @@
 
 # Using Networks to Study Microbes
 
-## Abstract
+## 🧬 Omics Data Analysis: A Computational Science Workshop
 
-The goal of the course is to provide an introduction to the use of networks in microbiology. The students will receive an overview of the field of **computational microbiology** with special emphasis on data standardization* and data sources, and how to use graph structures to solve biological questions. Further, the students will get a hands on introduction to Python programming language and its scientific libraries. At the end of the course the students will be able to:
+The **omics technology revolution** has generated **massive volumes of biological data** that require **differential analysis** for correct interpretation. These approaches necessitate the implementation of **computational tools and methodologies** to derive biological meaning from this type of data across various biological contexts.
 
-- Use multiple data sources for studying microbes in different biological contexts
-- Build networks, visualize and analyse them using different tools
-- Use Python to extract, transform and analyse different data structures
+---
+
+This **32-hour intensive course** offers practical and up-to-date training in **data science applied to the analysis of omics data**, such as **metagenomics, transcriptomics, and proteomics**.
+
+The primary objective is to **train researchers, bioinformaticians, and professionals** in the biological and health sciences in the management of omics data analysis tools and methodologies to **extract meaningful information**. Through interactive lectures, practical exercises, and the use of **real data**, participants will develop skills to **explore, visualize, and interpret omics data**, in addition to applying **biological network models** to address questions concerning the data utilized.
+
+---
+
+The course is structured over **four days**, beginning with an introduction to the **fundamentals of data science** and the **particular characteristics of omics data**. Topics covered will include processing techniques, analysis of **metagenomic, transcriptomic, and proteomic data**, visualization, functional enrichment, and **multi-omics integration**. A specific module will be dedicated to the application, analysis, and visualization of **biological networks** derived from the utilized and analyzed data.
+
+The course culminates with a module where participants will **apply everything learned to a real-world case study**, working with **public data**. The practical sessions will be conducted in **Python**, utilizing **Jupyter Notebooks** and other visualization tools.
+
+---
+
+Would you like me to translate another text or provide a summary of the course structure?
 
 ## Keywords
 
