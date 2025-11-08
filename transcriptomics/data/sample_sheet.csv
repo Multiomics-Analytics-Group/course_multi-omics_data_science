@@ -1,5 +1,5 @@
-sample;fastq_1;fastq_2;standedness;;;
-CD;SRR10104255.fastq.gz;;auto;;;
-CD;SRR10104256.fastq.gz;;auto;;;
-non-ibd;SRR10104257.fastq.gz;;auto;;;
-non-ibd;SRR10104258.fastq.gz;;auto;;;
+sample,fastq_1,fastq_2,standedness,,,
+CD,SRR10104255.fastq.gz,,auto,,,
+CD,SRR10104256.fastq.gz,,auto,,,
+non-ibd,SRR10104257.fastq.gz,,auto,,,
+non-ibd,SRR10104258.fastq.gz,,auto,,,
