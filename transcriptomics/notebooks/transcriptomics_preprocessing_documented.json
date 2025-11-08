@@ -1,0 +1,370 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Running Nextflow from Colab 🚀\n",
+        "\n",
+        "This notebook provides a step-by-step guide and executable code to set up the necessary environment and run **nf-core pipelines** (specifically `nf-core/rnaseq`) directly within a Google Colab notebook. This allows leveraging the powerful workflow management capabilities of Nextflow and nf-core for bioinformatics analyses without needing a dedicated server setup.\n",
+        "\n",
+        "The overall steps include:\n",
+        "1.  Installing **Java** (a prerequisite for Nextflow).\n",
+        "2.  Installing **Nextflow**.\n",
+        "3.  Setting up **Conda** to manage software dependencies.\n",
+        "4.  Setting up the data and configuration for the `nf-core/rnaseq` pipeline.\n",
+        "5.  Executing the RNA-seq analysis."
+      ],
+      "metadata": {
+        "id": "J_AfYl8IOo-q"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## 1. Installing Java Environment (OpenJDK 17) ☕\n",
+        "\n",
+        "Nextflow is written in Groovy and runs on the Java Virtual Machine (JVM). Therefore, a Java Development Kit (JDK) must be installed on the system before Nextflow can be executed. This step installs **OpenJDK 17** and configures the necessary environment variables (`JAVA_HOME` and `PATH`) so the system can locate the Java executable."
+      ],
+      "metadata": {
+        "id": "explanation-java-install"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "9g5_k5j2OnCg"
+      },
+      "outputs": [],
+      "source": [
+        "!apt update\n",
+        "!apt install openjdk-17-jdk\n",
+        "!export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64\n",
+        "!export PATH=$JAVA_HOME/bin:$PATH\n",
+        "!source ~/.bashrc"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## 2. Installing Nextflow 🧬\n",
+        "\n",
+        "This section downloads the Nextflow executable and moves it to a directory that is recognized in the Colab environment's system path (`/usr/bin/`). It then makes the file executable (`chmod +x`) and finally verifies the installation by checking the version number (`nextflow -v`)."
+      ],
+      "metadata": {
+        "id": "ovA2dn4BPIaY"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!wget -qO- https://get.nextflow.io | bash # Download Nextflow executable\n",
+        "!mv nextflow /usr/bin/nextflow # Move to a path Colab can access\n",
+        "!chmod +x /usr/bin/nextflow # Make it executable\n",
+        "!nextflow -v # Test the installation"
+      ],
+      "metadata": {
+        "id": "y3Zl5FQNPMPB"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## 3. Setting up Conda for Dependency Management 🧪\n",
+        "\n",
+        "Nextflow uses either Docker, Singularity, or **Conda** to manage the various software dependencies (like FastQC, STAR, Salmon, etc.) required by bioinformatics pipelines. Since a full Docker setup is challenging in Colab, we use **Conda**.\n",
+        "\n",
+        "### Installing `condacolab`\n",
+        "\n",
+        "The `condacolab` library is essential for installing the `conda` environment manager within the restricted environment of a Colab notebook. This step installs the library via `pip` and then runs the installation function, which may require a **runtime restart** (Colab will prompt you)."
+      ],
+      "metadata": {
+        "id": "t3wv9ZG-PRbU"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install -q condacolab # -q here means quiet installation\n",
+        "import condacolab\n",
+        "condacolab.install() # Installs conda and restarts the runtime"
+      ],
+      "metadata": {
+        "id": "yYeM8d99PT-z"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Configuring Conda Channels\n",
+        "\n",
+        "This step configures Conda to use the standard bioinformatics channels: `bioconda`, `conda-forge`, and `defaults`. These channels host the vast majority of bioinformatics tools. Setting `channel_priority strict` ensures that Conda prioritizes packages from the highest-priority channels (like `conda-forge` and `bioconda`) to resolve dependencies effectively and avoid conflicts."
+      ],
+      "metadata": {
+        "id": "explanation-conda-config"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!conda config --add channels bioconda\n",
+        "!conda config --add channels conda-forge\n",
+        "!conda config --add channels defaults\n",
+        "!conda config --set channel_priority strict"
+      ],
+      "metadata": {
+        "id": "kk9FMckIPUjp"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## 4. Running a Test Pipeline (Optional) ✅\n",
+        "\n",
+        "These cells show commented-out commands for running the `nf-core/demo` pipeline. This is a small, lightweight pipeline useful for quickly verifying that Nextflow, Conda, and the nf-core setup are all working correctly before moving to the main analysis."
+      ],
+      "metadata": {
+        "id": "sursu7ahPZSw"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#! nextflow pull nf-core/demo # Pulls the latest version of the demo pipeline"
+      ],
+      "metadata": {
+        "id": "lMymtYBoO7Eb"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#! nextflow run nf-core/demo -profile conda,test --outdir demo-results # Runs the pipeline using the 'conda' and 'test' profiles"
+      ],
+      "metadata": {
+        "id": "IygCHi6ePtQv"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# 5. Running RNA-seq pipeline with nf-core/rnaseq 📊\n",
+        "\n",
+        "This section focuses on executing the robust `nf-core/rnaseq` pipeline for transcriptome analysis. The data used is from **GSE137344** and is downsampled for quick execution in the Colab environment.\n",
+        "\n",
+        "![RNASeq pipeline](https://raw.githubusercontent.com/Multiomics-Analytics-Group/course_multi-omics_data_science/refs/heads/main/transcriptomics/notebooks/img/rnaseq.png)\n",
+        "\n",
+        "Data downloaded from [GSE137344](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE137344)."
+      ],
+      "metadata": {
+        "id": "z_2UONcTik6t"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Creating Data Folders for Transcriptomics Analysis 📂\n",
+        "\n",
+        "The following commands create the necessary directory structure: a main `transcriptomics` directory and a `data` subdirectory within it. All raw data and configuration files will be stored here."
+      ],
+      "metadata": {
+        "id": "oK3h5HyYWa2G"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!mkdir transcriptomics\n",
+        "!mkdir transcriptomics/data"
+      ],
+      "metadata": {
+        "id": "CZRNWpZ_T2Ke"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Cleaning up Previous Results (Optional) 🧹\n",
+        "\n",
+        "This command ensures a clean run by removing any existing `transcriptomics/results` directory. This is useful if the pipeline was run previously and you want to start fresh or resolve any issues."
+      ],
+      "metadata": {
+        "id": "explanation-cleanup"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "! rm -r transcriptomics/results"
+      ],
+      "metadata": {
+        "id": "k08jUxjtX_Mx"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Downloading Sample Sheet File for nf-core/rnaseq 📝\n",
+        "\n",
+        "The **sample sheet** (`sample_sheet.csv`) is a critical input file for all nf-core pipelines. It is a comma-separated file that tells the pipeline the location of the raw sequencing files, the sample name, and any associated experimental metadata (like condition, batch, etc.). This step downloads a pre-formatted sample sheet for the test data."
+      ],
+      "metadata": {
+        "id": "tabULdAGWhtD"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "! wget https://raw.githubusercontent.com/Multiomics-Analytics-Group/course_multi-omics_data_science/refs/heads/main/transcriptomics/data/sample_sheet.csv -O transcriptomics/data/sample_sheet.csv"
+      ],
+      "metadata": {
+        "id": "Gyh474X9UtE2"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Getting the Config File for the Pipeline ⚙️\n",
+        "\n",
+        "Nextflow pipelines can be customized using configuration files. The `low_resources.config` file is specifically designed to adjust the resource requirements (CPU, memory) for processes within the pipeline to run successfully on a limited-resource environment like Google Colab. This step downloads that custom configuration."
+      ],
+      "metadata": {
+        "id": "Up8J2BeaBkjp"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "! wget https://raw.githubusercontent.com/Multiomics-Analytics-Group/course_multi-omics_data_science/refs/heads/main/transcriptomics/low_resources.config -O transcriptomics/low_resources.config"
+      ],
+      "metadata": {
+        "id": "OXl5sLPeVVef"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Downloading Raw Sequencing Data (FASTQ files) 💾\n",
+        "\n",
+        "These commands download four raw sequencing files (in compressed FASTQ format, `.fastq.gz`) from the NCBI Sequence Read Archive (SRA), using their accession numbers (`SRR10104255` through `SRR10104258`). These are the actual input files for the RNA-seq analysis."
+      ],
+      "metadata": {
+        "id": "explanation-download-fastq"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!wget https://trace.ncbi.nlm.nih.gov/Traces/sra-reads-be/fastq?acc=SRR10104255 -O transcriptomics/data/SRR10104255.fastq.gz\n",
+        "!wget https://trace.ncbi.nlm.nih.gov/Traces/sra-reads-be/fastq?acc=SRR10104256 -O transcriptomics/data/SRR10104256.fastq.gz\n",
+        "!wget https://trace.ncbi.nlm.nih.gov/Traces/sra-reads-be/fastq?acc=SRR10104257 -O transcriptomics/data/SRR10104257.fastq.gz\n",
+        "!wget https://trace.ncbi.nlm.nih.gov/Traces/sra-reads-be/fastq?acc=SRR10104258 -O transcriptomics/data/SRR10104258.fastq.gz"
+      ],
+      "metadata": {
+        "id": "CW4E3y6biqBC"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Pulling the nf-core/rnaseq Pipeline Version\n",
+        "\n",
+        "This command uses `nextflow pull` to download and cache the latest version of the `nf-core/rnaseq` pipeline locally. This ensures that the execution uses a defined, stable version."
+      ],
+      "metadata": {
+        "id": "explanation-pull-rnaseq"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "! nextflow pull nf-core/rnaseq"
+      ],
+      "metadata": {
+        "id": "v6ICyhGxilCO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Executing the nf-core/rnaseq Pipeline 🚀\n",
+        "\n",
+        "This is the main execution command. It runs the `nf-core/rnaseq` pipeline with the following critical parameters:\n",
+        "\n",
+        "* `--input transcriptomics/data/sample_sheet.csv`: Specifies the sample sheet with file and metadata information.\n",
+        "* `--outdir transcriptomics/results`: Designates the output directory where all results, reports, and logs will be stored.\n",
+        "* `-profile conda`: Instructs Nextflow to use **Conda** to manage and install all required software dependencies.\n",
+        "* `-c transcriptomics/low_resources.config`: Applies the custom configuration file to adjust resource settings for Colab.\n",
+        "* `--igenomes_ignore` and `--genome null`: These parameters tell the pipeline to skip the automated genome fetching/indexing and rely on the configuration file to define a minimal or custom reference setup, which is necessary for low-resource testing.\n",
+        "* `-resume`: Allows the pipeline to pick up from the last successful step if a run is interrupted, saving significant time."
+      ],
+      "metadata": {
+        "id": "CG0i4NLAwZmX"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "! nextflow run \\\n",
+        "    nf-core/rnaseq \\\n",
+        "    --input transcriptomics/data/sample_sheet.csv \\\n",
+        "    --outdir transcriptomics/results \\\n",
+        "    --igenomes_ignore \\\n",
+        "    --genome null \\\n",
+        "    -profile conda \\\n",
+        "    -c transcriptomics/low_resources.config \\\n",
+        "    -resume"
+      ],
+      "metadata": {
+        "id": "hXGOe4ctjP-i"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "WoL72Fyjr2GC"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
