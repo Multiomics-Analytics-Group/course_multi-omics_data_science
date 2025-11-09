@@ -1,10 +1,3 @@
-<p align="center">
-  <img src="figures/cfb.png" width="300">
-</p>
-<p align="center">
-  <img src="figures/netmicrobes.png" width="600">
-</p>
-
 # 🧬 Omics Data Analysis: A Computational Science Workshop
 
 The **omics technology revolution** has generated **massive volumes of biological data** that require **differential analysis** for correct interpretation. These approaches necessitate the implementation of **computational tools and methodologies** to derive biological meaning from this type of data across various biological contexts.
