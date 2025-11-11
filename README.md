@@ -19,7 +19,7 @@ The course culminates with a module where participants will **apply everything l
 
 Computational microbiology, networks, databases, Python, programming, data, pipelines, data science.
 
-## Sylabus
+## Syllabus
 
 |Time| DAY 1| DAY 2| DAY 3| DAY 4|
 |-----|-----|-----|-----|-----|
