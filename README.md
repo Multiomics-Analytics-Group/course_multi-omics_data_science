@@ -93,6 +93,8 @@ In this course we use [Google Colab](https://colab.research.google.com/) to exec
 
 ## Acknowledgements
 
-Some of the slides and notebooks have been inspired or reused from the Data [Science Platform](https://multiomics-analytics-group.github.io/data-science-platform/) at the [Informatics Platform](https://www.biosustain.dtu.dk/technologies/biofoundry/informatics) the Novo Nordisk Foundation Center for Biosustainability at the [Technical University of Denmark](https://www.dtu.dk/).
+Some of the slides and notebooks have been inspired or reused from the Data [Science Platform](https://multiomics-analytics-group.github.io/data-science-platform/) at the [Informatics Platform](https://www.biosustain.dtu.dk/technologies/biofoundry/informatics) the Novo Nordisk Foundation Center for Biosustainability at the [Technical University of Denmark](https://www.dtu.dk/). 
+Other relevant courses can be found in the [Biosustain GitHub](https://github.com/biosustain) (e.g., [R viz](https://github.com/biosustain/dsp_workshop_datavizR), [Python viz](https://github.com/biosustain/dsp_workshop_dataviz_python), [Nextflow training](https://github.com/biosustain/dsp_nextflow_training), [Proteomics](https://github.com/biosustain/dsp_course_proteomics_intro), [Transcriptomics](https://github.com/biosustain/dsp_transcriptomics_training), [Metagenomics](https://github.com/biosustain/dsp_metagenomics_training), [Bash](https://github.com/biosustain/dsp_workshop_bash), ...).
+
 
 Some notebooks have been inspired by the course [Python Tsunami](https://github.com/Center-for-Health-Data-Science/PythonTsunami) at the [Center for Health Data Science (HeaDS)](https://heads.ku.dk/) at the [University of Copenhagen](https://www.ku.dk/).
